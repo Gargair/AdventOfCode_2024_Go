@@ -10,8 +10,8 @@ import (
 
 type Day01_Solution struct{}
 
-func (s Day01_Solution) Part1(inputPath string) string {
-	leftSide, rightSide := s.PrepareInput(inputPath)
+func (s Day01_Solution) Part1(inputPath string, expectedLines int) string {
+	leftSide, rightSide := s.PrepareInput(inputPath, expectedLines)
 
 	slices.Sort(*leftSide)
 	slices.Sort(*rightSide)
@@ -25,8 +25,8 @@ func (s Day01_Solution) Part1(inputPath string) string {
 	return strconv.Itoa(sum)
 }
 
-func (s Day01_Solution) Part2(inputPath string) string {
-	leftSide, rightSide := s.PrepareInput(inputPath)
+func (s Day01_Solution) Part2(inputPath string, expectedLines int) string {
+	leftSide, rightSide := s.PrepareInput(inputPath, expectedLines)
 
 	rightDict := make(map[int]int)
 
@@ -41,22 +41,17 @@ func (s Day01_Solution) Part2(inputPath string) string {
 	return strconv.Itoa(sum)
 }
 
-func (s Day01_Solution) PrepareInput(inputPath string) (leftSide *[]int, rightSide *[]int) {
-	lines, err := helper.ReadAllLines(inputPath+"/Day01.txt", 1000)
+func (s Day01_Solution) PrepareInput(inputPath string, expectedLines int) (leftSide *[]int, rightSide *[]int) {
+	lines, err := helper.ReadAllLines(inputPath+"/Day01.txt", expectedLines)
 
 	if err != nil {
 		panic(err)
 	}
 
-	localLeftSide := make([]int, 0, 1000)
-	localRightSide := make([]int, 0, 1000)
+	localLeftSide := make([]int, 0, expectedLines)
+	localRightSide := make([]int, 0, expectedLines)
 
 	for _, line := range *lines {
-		// var leftValue, rightValue int
-		// _, err := fmt.Sscanf(line, "%d %d", &leftValue, &rightValue)
-		// if err != nil {
-		// 	panic(err)
-		// }
 		res := strings.Fields(line)
 		leftValue, leftErr := strconv.Atoi(res[0])
 		if leftErr != nil {
@@ -71,11 +66,4 @@ func (s Day01_Solution) PrepareInput(inputPath string) (leftSide *[]int, rightSi
 	}
 
 	return &localLeftSide, &localRightSide
-}
-
-func (s Day01_Solution) TestSorting(inputPath string) {
-	leftSide, rightSide := s.PrepareInput(inputPath)
-
-	slices.Sort(*leftSide)
-	slices.Sort(*rightSide)
 }
