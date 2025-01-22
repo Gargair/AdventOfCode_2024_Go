@@ -11,7 +11,11 @@ import (
 type Day01_Solution struct{}
 
 func (s Day01_Solution) Part1(inputPath string, expectedLines int) string {
-	leftSide, rightSide := s.PrepareInput(inputPath, expectedLines)
+	leftSide, rightSide, err := s.PrepareInput(inputPath, expectedLines)
+
+	if err != nil {
+		return err.Error()
+	}
 
 	slices.Sort(*leftSide)
 	slices.Sort(*rightSide)
@@ -26,7 +30,11 @@ func (s Day01_Solution) Part1(inputPath string, expectedLines int) string {
 }
 
 func (s Day01_Solution) Part2(inputPath string, expectedLines int) string {
-	leftSide, rightSide := s.PrepareInput(inputPath, expectedLines)
+	leftSide, rightSide, err := s.PrepareInput(inputPath, expectedLines)
+
+	if err != nil {
+		return err.Error()
+	}
 
 	rightDict := make(map[int]int)
 
@@ -41,11 +49,11 @@ func (s Day01_Solution) Part2(inputPath string, expectedLines int) string {
 	return strconv.Itoa(sum)
 }
 
-func (s Day01_Solution) PrepareInput(inputPath string, expectedLines int) (leftSide *[]int, rightSide *[]int) {
+func (s Day01_Solution) PrepareInput(inputPath string, expectedLines int) (leftSide *[]int, rightSide *[]int, err error) {
 	lines, err := helper.ReadAllLines(inputPath+"/Day01.txt", expectedLines)
 
 	if err != nil {
-		panic(err)
+		return nil, nil, err
 	}
 
 	localLeftSide := make([]int, 0, expectedLines)
@@ -53,17 +61,17 @@ func (s Day01_Solution) PrepareInput(inputPath string, expectedLines int) (leftS
 
 	for _, line := range *lines {
 		res := strings.Fields(line)
-		leftValue, leftErr := strconv.Atoi(res[0])
-		if leftErr != nil {
-			panic(leftErr)
+		leftValue, err := strconv.Atoi(res[0])
+		if err != nil {
+			return nil, nil, err
 		}
-		rightValue, rightErr := strconv.Atoi(res[1])
-		if rightErr != nil {
-			panic(rightErr)
+		rightValue, err := strconv.Atoi(res[1])
+		if err != nil {
+			return nil, nil, err
 		}
 		localLeftSide = append(localLeftSide, leftValue)
 		localRightSide = append(localRightSide, rightValue)
 	}
 
-	return &localLeftSide, &localRightSide
+	return &localLeftSide, &localRightSide, nil
 }
