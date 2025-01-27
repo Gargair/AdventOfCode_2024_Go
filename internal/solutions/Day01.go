@@ -1,8 +1,8 @@
 package solutions
 
 import (
-	"AdventOfCode/pgk/helper"
-	"AdventOfCode/pgk/helper/intmath"
+	"AdventOfCode/internal/helper"
+	"AdventOfCode/internal/intmath"
 	"slices"
 	"strconv"
 	"strings"

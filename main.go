@@ -1,8 +1,8 @@
 package main
 
 import (
-	"AdventOfCode/pgk/helper"
-	"AdventOfCode/solutions"
+	"AdventOfCode/internal/helper"
+	"AdventOfCode/internal/solutions"
 	"fmt"
 )
 
@@ -11,6 +11,6 @@ func main() {
 	s = *new(solutions.Day01_Solution)
 	res := s.Part1("Input", 1000)
 	fmt.Println(res)
-	// res = s.Part2("Input_Test")
-	// fmt.Println(res)
+	res = s.Part2("Input", 1000)
+	fmt.Println(res)
 }

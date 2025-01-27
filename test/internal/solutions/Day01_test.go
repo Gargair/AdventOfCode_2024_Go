@@ -1,8 +1,8 @@
 package solutions_test
 
 import (
-	"AdventOfCode/pgk/helper"
-	"AdventOfCode/solutions"
+	"AdventOfCode/internal/helper"
+	"AdventOfCode/internal/solutions"
 	"fmt"
 	"strconv"
 	"strings"
@@ -16,7 +16,7 @@ type args struct {
 
 func TestDay01_Part1(t *testing.T) {
 
-	lines, err := helper.ReadAllLines("../Testcases/Day01.txt", 2)
+	lines, err := helper.ReadAllLines("../../testdata/Day01.txt", 2)
 
 	if err != nil {
 		t.Errorf("Day01: %v", err)
@@ -40,7 +40,7 @@ func TestDay01_Part1(t *testing.T) {
 			name string
 			args args
 			want string
-		}{name: fmt.Sprintf("inputPath=%v/expectedLines=%v", inputPath, expectedLines), args: args{inputPath: "../" + inputPath, expectedLines: expectedLines}, want: want})
+		}{name: fmt.Sprintf("inputPath=%v/expectedLines=%v", inputPath, expectedLines), args: args{inputPath: "../../../" + inputPath, expectedLines: expectedLines}, want: want})
 	}
 	s := solutions.Day01_Solution{}
 	for _, tt := range tests {
@@ -53,7 +53,7 @@ func TestDay01_Part1(t *testing.T) {
 }
 
 func TestDay01_Part2(t *testing.T) {
-	lines, err := helper.ReadAllLines("../Testcases/Day01.txt", 2)
+	lines, err := helper.ReadAllLines("../../testdata/Day01.txt", 2)
 
 	if err != nil {
 		t.Errorf("Day01: %v", err)
@@ -77,7 +77,7 @@ func TestDay01_Part2(t *testing.T) {
 			name string
 			args args
 			want string
-		}{name: fmt.Sprintf("inputPath=%v/expectedLines=%v", inputPath, expectedLines), args: args{inputPath: "../" + inputPath, expectedLines: expectedLines}, want: want})
+		}{name: fmt.Sprintf("inputPath=%v/expectedLines=%v", inputPath, expectedLines), args: args{inputPath: "../../../" + inputPath, expectedLines: expectedLines}, want: want})
 	}
 	s := solutions.Day01_Solution{}
 	for _, tt := range tests {
@@ -90,7 +90,7 @@ func TestDay01_Part2(t *testing.T) {
 }
 
 func BenchmarkDay01_Part1(b *testing.B) {
-	lines, err := helper.ReadAllLines("../Testcases/Day01.txt", 2)
+	lines, err := helper.ReadAllLines("../../testdata/Day01.txt", 2)
 
 	if err != nil {
 		b.Errorf("Day01: %v", err)
@@ -114,7 +114,7 @@ func BenchmarkDay01_Part1(b *testing.B) {
 			name string
 			args args
 			want string
-		}{name: fmt.Sprintf("inputPath=%v/expectedLines=%v", inputPath, expectedLines), args: args{inputPath: "../" + inputPath, expectedLines: expectedLines}, want: want})
+		}{name: fmt.Sprintf("inputPath=%v/expectedLines=%v", inputPath, expectedLines), args: args{inputPath: "../../../" + inputPath, expectedLines: expectedLines}, want: want})
 	}
 	s := solutions.Day01_Solution{}
 	for _, tt := range tests {
@@ -127,7 +127,7 @@ func BenchmarkDay01_Part1(b *testing.B) {
 }
 
 func BenchmarkDay01_Part2(b *testing.B) {
-	lines, err := helper.ReadAllLines("../Testcases/Day01.txt", 2)
+	lines, err := helper.ReadAllLines("../../testdata/Day01.txt", 2)
 
 	if err != nil {
 		b.Errorf("Day01: %v", err)
@@ -151,7 +151,7 @@ func BenchmarkDay01_Part2(b *testing.B) {
 			name string
 			args args
 			want string
-		}{name: fmt.Sprintf("inputPath=%v/expectedLines=%v", inputPath, expectedLines), args: args{inputPath: "../" + inputPath, expectedLines: expectedLines}, want: want})
+		}{name: fmt.Sprintf("inputPath=%v/expectedLines=%v", inputPath, expectedLines), args: args{inputPath: "../../../" + inputPath, expectedLines: expectedLines}, want: want})
 	}
 	s := solutions.Day01_Solution{}
 	for _, tt := range tests {
