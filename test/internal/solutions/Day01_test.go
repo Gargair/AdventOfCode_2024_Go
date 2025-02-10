@@ -40,7 +40,12 @@ func TestDay01_Part1(t *testing.T) {
 			name string
 			args args
 			want string
-		}{name: fmt.Sprintf("inputPath=%v/expectedLines=%v", inputPath, expectedLines), args: args{inputPath: "../../../" + inputPath, expectedLines: expectedLines}, want: want})
+		}{
+			name: fmt.Sprintf("inputPath=%v/expectedLines=%v", inputPath, expectedLines),
+			args: args{
+				inputPath:     "../../../" + inputPath,
+				expectedLines: expectedLines},
+			want: want})
 	}
 	s := solutions.Day01_Solution{}
 	for _, tt := range tests {
@@ -77,7 +82,12 @@ func TestDay01_Part2(t *testing.T) {
 			name string
 			args args
 			want string
-		}{name: fmt.Sprintf("inputPath=%v/expectedLines=%v", inputPath, expectedLines), args: args{inputPath: "../../../" + inputPath, expectedLines: expectedLines}, want: want})
+		}{
+			name: fmt.Sprintf("inputPath=%v/expectedLines=%v", inputPath, expectedLines),
+			args: args{
+				inputPath:     "../../../" + inputPath,
+				expectedLines: expectedLines},
+			want: want})
 	}
 	s := solutions.Day01_Solution{}
 	for _, tt := range tests {
@@ -114,7 +124,12 @@ func BenchmarkDay01_Part1(b *testing.B) {
 			name string
 			args args
 			want string
-		}{name: fmt.Sprintf("inputPath=%v/expectedLines=%v", inputPath, expectedLines), args: args{inputPath: "../../../" + inputPath, expectedLines: expectedLines}, want: want})
+		}{
+			name: fmt.Sprintf("inputPath=%v/expectedLines=%v", inputPath, expectedLines),
+			args: args{
+				inputPath:     "../../../" + inputPath,
+				expectedLines: expectedLines},
+			want: want})
 	}
 	s := solutions.Day01_Solution{}
 	for _, tt := range tests {
@@ -151,7 +166,12 @@ func BenchmarkDay01_Part2(b *testing.B) {
 			name string
 			args args
 			want string
-		}{name: fmt.Sprintf("inputPath=%v/expectedLines=%v", inputPath, expectedLines), args: args{inputPath: "../../../" + inputPath, expectedLines: expectedLines}, want: want})
+		}{
+			name: fmt.Sprintf("inputPath=%v/expectedLines=%v", inputPath, expectedLines),
+			args: args{
+				inputPath:     "../../../" + inputPath,
+				expectedLines: expectedLines},
+			want: want})
 	}
 	s := solutions.Day01_Solution{}
 	for _, tt := range tests {
