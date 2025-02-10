@@ -17,13 +17,13 @@ func (s Day01_Solution) Part1(inputPath string, expectedLines int) string {
 		return err.Error()
 	}
 
-	slices.Sort(*leftSide)
-	slices.Sort(*rightSide)
+	slices.Sort(leftSide)
+	slices.Sort(rightSide)
 
 	sum := 0
-	for i, leftValue := range *leftSide {
-		rightValue := (*rightSide)[i]
-		sum += intmath.AbsDiff(&leftValue, &rightValue)
+	for i, leftValue := range leftSide {
+		rightValue := rightSide[i]
+		sum += intmath.AbsDiff(leftValue, rightValue)
 	}
 
 	return strconv.Itoa(sum)
@@ -38,18 +38,18 @@ func (s Day01_Solution) Part2(inputPath string, expectedLines int) string {
 
 	rightDict := make(map[int]int)
 
-	for _, rightValue := range *rightSide {
+	for _, rightValue := range rightSide {
 		rightDict[rightValue] = rightDict[rightValue] + 1
 	}
 
 	sum := 0
-	for _, leftValue := range *leftSide {
+	for _, leftValue := range leftSide {
 		sum += leftValue * rightDict[leftValue]
 	}
 	return strconv.Itoa(sum)
 }
 
-func (s Day01_Solution) PrepareInput(inputPath string, expectedLines int) (leftSide *[]int, rightSide *[]int, err error) {
+func (s Day01_Solution) PrepareInput(inputPath string, expectedLines int) (leftSide []int, rightSide []int, err error) {
 	lines, err := helper.ReadAllLines(inputPath+"/Day01.txt", expectedLines)
 
 	if err != nil {
@@ -73,5 +73,5 @@ func (s Day01_Solution) PrepareInput(inputPath string, expectedLines int) (leftS
 		localRightSide = append(localRightSide, rightValue)
 	}
 
-	return &localLeftSide, &localRightSide, nil
+	return localLeftSide, localRightSide, nil
 }

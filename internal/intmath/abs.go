@@ -1,13 +1,13 @@
 package intmath
 
-func Abs(x *int) int {
+func Abs(x int) int {
 	y := 0
-	return AbsDiff(x, &y)
+	return AbsDiff(x, y)
 }
 
-func AbsDiff(x, y *int) int {
-	if *x < *y {
-		return *y - *x
+func AbsDiff(x, y int) int {
+	if x < y {
+		return y - x
 	}
-	return *x - *y
+	return x - y
 }
