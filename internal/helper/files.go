@@ -6,7 +6,7 @@ import (
 	"strings"
 )
 
-func ReadAllLines(filePath string, expectedLines int) (lines *[]string, err error) {
+func ReadAllLines(filePath string, expectedLines int) (lines []string, err error) {
 	localLines := make([]string, 0, expectedLines)
 
 	file, err := os.Open(filePath)
@@ -23,5 +23,5 @@ func ReadAllLines(filePath string, expectedLines int) (lines *[]string, err erro
 	if err := scanner.Err(); err != nil {
 		return nil, err
 	}
-	return &localLines, nil
+	return localLines, nil
 }

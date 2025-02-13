@@ -59,7 +59,7 @@ func (s Day01_Solution) PrepareInput(inputPath string, expectedLines int) (leftS
 	localLeftSide := make([]int, 0, expectedLines)
 	localRightSide := make([]int, 0, expectedLines)
 
-	for _, line := range *lines {
+	for _, line := range lines {
 		res := strings.Fields(line)
 		leftValue, err := strconv.Atoi(res[0])
 		if err != nil {
