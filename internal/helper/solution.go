@@ -29,7 +29,7 @@ func ReadTestData(testInputPath string, part int) ([]Testcase, error) {
 		return nil, err
 	}
 	tests := make([]Testcase, 0, 2)
-	for _, line := range *lines {
+	for _, line := range lines {
 		res := strings.Fields(line)
 		want := res[part-1]
 		inputPath := res[2]
