@@ -23,7 +23,7 @@ type Testcase struct {
 }
 
 func ReadTestData(testInputPath string, part int) ([]Testcase, error) {
-	lines, err := ReadAllLines("../../testdata/Day01.txt", 2)
+	lines, err := ReadAllLines(testInputPath, 2)
 
 	if err != nil {
 		return nil, err
