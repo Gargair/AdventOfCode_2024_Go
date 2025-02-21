@@ -30,7 +30,7 @@ func TestDay02_Part2(t *testing.T) {
 		t.Errorf("Day02: %v", err)
 		return
 	}
-	s := solutions.Day01_Solution{}
+	s := solutions.Day02_Solution{}
 	for _, tt := range tests {
 		t.Run(tt.Name, func(t *testing.T) {
 			if got := s.Part2(tt.Args.InputPath, tt.Args.ExpectedLines); got != tt.Want {

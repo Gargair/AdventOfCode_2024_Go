@@ -3,6 +3,7 @@ package solutions
 import (
 	"AdventOfCode/internal/helper"
 	"AdventOfCode/internal/intmath"
+	"slices"
 	"strconv"
 	"strings"
 )
@@ -27,25 +28,20 @@ func (s Day02_Solution) Part1(inputPath string, expectedLines int) string {
 }
 
 func (s Day02_Solution) Part2(inputPath string, expectedLines int) string {
-	// leftSide, rightSide, err := s.PrepareInput(inputPath, expectedLines)
+	reports, err := s.PrepareInput(inputPath, expectedLines)
 
-	// if err != nil {
-	// 	return err.Error()
-	// }
+	if err != nil {
+		return err.Error()
+	}
 
-	// rightDict := make(map[int]int)
+	count := 0
+	for _, report := range reports {
+		if IsValidReportPart2(report) {
+			count++
+		}
+	}
 
-	// for _, rightValue := range rightSide {
-	// 	rightDict[rightValue] = rightDict[rightValue] + 1
-	// }
-
-	// sum := 0
-	// for _, leftValue := range leftSide {
-	// 	sum += leftValue * rightDict[leftValue]
-	// }
-	// return strconv.Itoa(sum)
-
-	return ""
+	return strconv.Itoa(count)
 }
 
 func IsValidReportPart1(report []int) bool {
@@ -68,6 +64,18 @@ func IsValidReportPart1(report []int) bool {
 		}
 	}
 	return true
+}
+
+func IsValidReportPart2(report []int) bool {
+	if IsValidReportPart1(report) {
+		return true
+	}
+	for index := range report {
+		if IsValidReportPart1(slices.Delete(slices.Clone(report), index, index+1)) {
+			return true
+		}
+	}
+	return false
 }
 
 func (s Day02_Solution) PrepareInput(inputPath string, expectedLines int) (reports [][]int, err error) {
