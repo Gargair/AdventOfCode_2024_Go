@@ -1,22 +1,22 @@
-package solutions_test
+package day01
 
 import (
 	"AdventOfCode/internal/helper"
-	"AdventOfCode/internal/solutions"
+	"AdventOfCode/internal/runner"
 	"testing"
 )
 
 func TestDay01_Part1(t *testing.T) {
-	tests, err := helper.ReadTestData("../../testdata/Day01.txt", 1)
+	tests, err := helper.ReadTestData("day01", 1)
 
 	if err != nil {
 		t.Errorf("Day01: %v", err)
 		return
 	}
-	s := solutions.Day01_Solution{}
+	s := Day01_Solution{}
 	for _, tt := range tests {
 		t.Run(tt.Name, func(t *testing.T) {
-			if got := s.Part1(tt.Args.InputPath, tt.Args.ExpectedLines); got != tt.Want {
+			if got, _ := runner.Run(s, 1, tt.Args.InputPath); got != tt.Want {
 				t.Errorf("%v = %v, want %v", tt.Name, got, tt.Want)
 			}
 		})
@@ -24,16 +24,16 @@ func TestDay01_Part1(t *testing.T) {
 }
 
 func TestDay01_Part2(t *testing.T) {
-	tests, err := helper.ReadTestData("../../testdata/Day01.txt", 2)
+	tests, err := helper.ReadTestData("day01", 2)
 
 	if err != nil {
 		t.Errorf("Day01: %v", err)
 		return
 	}
-	s := solutions.Day01_Solution{}
+	s := Day01_Solution{}
 	for _, tt := range tests {
 		t.Run(tt.Name, func(t *testing.T) {
-			if got := s.Part2(tt.Args.InputPath, tt.Args.ExpectedLines); got != tt.Want {
+			if got, _ := runner.Run(s, 2, tt.Args.InputPath); got != tt.Want {
 				t.Errorf("%v = %v, want %v", tt.Name, got, tt.Want)
 			}
 		})
@@ -41,34 +41,34 @@ func TestDay01_Part2(t *testing.T) {
 }
 
 func BenchmarkDay01_Part1(b *testing.B) {
-	tests, err := helper.ReadTestData("../../testdata/Day01.txt", 1)
+	tests, err := helper.ReadTestData("day01", 1)
 
 	if err != nil {
 		b.Errorf("Day01: %v", err)
 		return
 	}
-	s := solutions.Day01_Solution{}
+	s := Day01_Solution{}
 	for _, tt := range tests {
 		b.Run(tt.Name, func(b *testing.B) {
 			for i := 0; i < b.N; i++ {
-				s.Part1(tt.Args.InputPath, tt.Args.ExpectedLines)
+				runner.Run(s, 1, tt.Args.InputPath)
 			}
 		})
 	}
 }
 
 func BenchmarkDay01_Part2(b *testing.B) {
-	tests, err := helper.ReadTestData("../../testdata/Day01.txt", 2)
+	tests, err := helper.ReadTestData("day01", 2)
 
 	if err != nil {
 		b.Errorf("Day01: %v", err)
 		return
 	}
-	s := solutions.Day01_Solution{}
+	s := Day01_Solution{}
 	for _, tt := range tests {
 		b.Run(tt.Name, func(b *testing.B) {
 			for i := 0; i < b.N; i++ {
-				s.Part2(tt.Args.InputPath, tt.Args.ExpectedLines)
+				runner.Run(s, 2, tt.Args.InputPath)
 			}
 		})
 	}

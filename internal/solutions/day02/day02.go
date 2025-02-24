@@ -1,8 +1,9 @@
-package solutions
+package day02
 
 import (
-	"AdventOfCode/internal/helper"
+	"AdventOfCode/internal/common"
 	"AdventOfCode/internal/intmath"
+	"fmt"
 	"slices"
 	"strconv"
 	"strings"
@@ -10,11 +11,10 @@ import (
 
 type Day02_Solution struct{}
 
-func (s Day02_Solution) Part1(inputPath string, expectedLines int) string {
-	reports, err := s.PrepareInput(inputPath, expectedLines)
-
-	if err != nil {
-		return err.Error()
+func (s Day02_Solution) SolvePart1(input interface{}) (string, error) {
+	reports, ok := input.([][]int)
+	if !ok {
+		return "", fmt.Errorf("expected [][]int, got %T", input)
 	}
 
 	count := 0
@@ -24,14 +24,13 @@ func (s Day02_Solution) Part1(inputPath string, expectedLines int) string {
 		}
 	}
 
-	return strconv.Itoa(count)
+	return strconv.Itoa(count), nil
 }
 
-func (s Day02_Solution) Part2(inputPath string, expectedLines int) string {
-	reports, err := s.PrepareInput(inputPath, expectedLines)
-
-	if err != nil {
-		return err.Error()
+func (s Day02_Solution) SolvePart2(input interface{}) (string, error) {
+	reports, ok := input.([][]int)
+	if !ok {
+		return "", fmt.Errorf("expected [][]int, got %T", input)
 	}
 
 	count := 0
@@ -41,7 +40,7 @@ func (s Day02_Solution) Part2(inputPath string, expectedLines int) string {
 		}
 	}
 
-	return strconv.Itoa(count)
+	return strconv.Itoa(count), nil
 }
 
 func IsValidReportPart1(report []int) bool {
@@ -70,22 +69,30 @@ func IsValidReportPart2(report []int) bool {
 	if IsValidReportPart1(report) {
 		return true
 	}
+	mu := make(chan bool, len(report))
 	for index := range report {
-		if IsValidReportPart1(slices.Delete(slices.Clone(report), index, index+1)) {
-			return true
+		go func() {
+			if IsValidReportPart1(slices.Delete(slices.Clone(report), index, index+1)) {
+				mu <- true
+			} else {
+				mu <- false
+			}
+		}()
+	}
+	isValid := false
+	for range report {
+		result := <-mu
+		if result {
+			isValid = true
 		}
 	}
-	return false
+	return isValid
 }
 
-func (s Day02_Solution) PrepareInput(inputPath string, expectedLines int) (reports [][]int, err error) {
-	lines, err := helper.ReadAllLines(inputPath+"/Day02.txt", expectedLines)
+func (s Day02_Solution) ParseInput(input string) (ret interface{}, err error) {
+	lines := common.SplitLines(input)
 
-	if err != nil {
-		return nil, err
-	}
-
-	reports = make([][]int, 0, expectedLines)
+	reports := make([][]int, 0, len(lines))
 
 	for _, line := range lines {
 		res := strings.Fields(line)
