@@ -9,7 +9,7 @@ import (
 )
 
 // Run executes a solution with the given parameters
-func Run(solution solutions.Solution, part int, inputFile string) (string, time.Duration) {
+func Run(solution solutions.Solution, part int, inputFile string) []RunResult {
 	// Read input file
 	data, err := os.ReadFile(inputFile)
 	if err != nil {
@@ -18,9 +18,6 @@ func Run(solution solutions.Solution, part int, inputFile string) (string, time.
 	}
 	input := string(data)
 
-	// Measure execution time
-	start := time.Now()
-
 	// Parse the input
 	parsed, err := solution.ParseInput(input)
 	if err != nil {
@@ -28,20 +25,35 @@ func Run(solution solutions.Solution, part int, inputFile string) (string, time.
 		os.Exit(1)
 	}
 
+	results := make([]RunResult, 0)
 	// Execute the appropriate part
-	var result string
-	var solveErr error
-	if part == 1 {
-		result, solveErr = solution.SolvePart1(parsed)
-	} else {
-		result, solveErr = solution.SolvePart2(parsed)
+	if part == 0 || part == 1 {
+		start := time.Now()
+		res, solveErr := solution.SolvePart1(parsed)
+		if solveErr != nil {
+			fmt.Printf("Error solving problem: %v\n", solveErr)
+			os.Exit(1)
+		}
+		elapsed := time.Since(start)
+		results = append(results, RunResult{"Part 1", res, elapsed})
 	}
 
-	if solveErr != nil {
-		fmt.Printf("Error solving problem: %v\n", solveErr)
-		os.Exit(1)
+	if part == 0 || part == 2 {
+		start := time.Now()
+		res, solveErr := solution.SolvePart2(parsed)
+		if solveErr != nil {
+			fmt.Printf("Error solving problem: %v\n", solveErr)
+			os.Exit(1)
+		}
+		elapsed := time.Since(start)
+		results = append(results, RunResult{"Part 2", res, elapsed})
 	}
 
-	elapsed := time.Since(start)
-	return result, elapsed
+	return results
+}
+
+type RunResult struct {
+	Name    string
+	Result  string
+	Elapsed time.Duration
 }

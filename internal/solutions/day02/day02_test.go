@@ -16,8 +16,8 @@ func TestDay02_Part1(t *testing.T) {
 	s := Day02_Solution{}
 	for _, tt := range tests {
 		t.Run(tt.Name, func(t *testing.T) {
-			if got, _ := runner.Run(s, 1, tt.Args.InputPath); got != tt.Want {
-				t.Errorf("%v = %v, want %v", tt.Name, got, tt.Want)
+			if got := runner.Run(s, 1, tt.Args.InputPath)[0]; got.Result != tt.Want {
+				t.Errorf("%v = %v, want %v", tt.Name, got.Result, tt.Want)
 			}
 		})
 	}
@@ -33,9 +33,11 @@ func TestDay02_Part2(t *testing.T) {
 	s := Day02_Solution{}
 	for _, tt := range tests {
 		t.Run(tt.Name, func(t *testing.T) {
-			if got, _ := runner.Run(s, 2, tt.Args.InputPath); got != tt.Want {
-				t.Errorf("%v = %v, want %v", tt.Name, got, tt.Want)
-			}
+			t.Run(tt.Name, func(t *testing.T) {
+				if got := runner.Run(s, 2, tt.Args.InputPath)[0]; got.Result != tt.Want {
+					t.Errorf("%v = %v, want %v", tt.Name, got.Result, tt.Want)
+				}
+			})
 		})
 	}
 }

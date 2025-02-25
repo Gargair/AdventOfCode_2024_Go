@@ -31,8 +31,8 @@ func main() {
 	}
 
 	part, err := strconv.Atoi(*partPtr)
-	if err != nil || (part != 1 && part != 2) {
-		fmt.Println("Part must be 1 or 2")
+	if err != nil || (part != 0 && part != 1 && part != 2) {
+		fmt.Println("Part must be 0, 1 or 2")
 		os.Exit(1)
 	}
 
@@ -53,10 +53,11 @@ func main() {
 	}
 
 	// Run the solution
-	result, elapsed := runner.Run(solution, part, inputFile)
+	results := runner.Run(solution, part, inputFile)
 
-	fmt.Printf("Result: %s\n", result)
-	fmt.Printf("Execution time: %s\n", elapsed)
+	for _, result := range results {
+		fmt.Printf("Name: %s\tResult: %s\tExecution time: %s\n", result.Name, result.Result, result.Elapsed)
+	}
 }
 
 func getSolution(problem string) solutions.Solution {
