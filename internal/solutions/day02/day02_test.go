@@ -59,7 +59,7 @@ func BenchmarkDay02_Part1(b *testing.B) {
 	}
 }
 
-func BenchmarkDay01_Part2(b *testing.B) {
+func BenchmarkDay02_Part2(b *testing.B) {
 	tests, err := helper.ReadTestData("day02", 2)
 
 	if err != nil {
