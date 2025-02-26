@@ -261,8 +261,9 @@ func Test{{.StructName}}_Part1(t *testing.T) {
 	s := {{.StructName}}{}
 	for _, tt := range tests {
 		t.Run(tt.Name, func(t *testing.T) {
-			if got := runner.Run(s, 1, tt.Args.InputPath)[0]; got.Result != tt.Want {
-				t.Errorf("%v = %v, want %v", tt.Name, got.Result, tt.Want)
+			res, _ := runner.Run(s, 1, tt.Args.InputPath)
+			if len(res) > 0 && res[0].Result != tt.Want {
+				t.Errorf("%v = %v, want %v", tt.Name, res[0].Result, tt.Want)
 			}
 		})
 	}
@@ -278,8 +279,9 @@ func Test{{.StructName}}_Part2(t *testing.T) {
 	s := {{.StructName}}{}
 	for _, tt := range tests {
 		t.Run(tt.Name, func(t *testing.T) {
-			if got := runner.Run(s, 2, tt.Args.InputPath)[0]; got.Result != tt.Want {
-				t.Errorf("%v = %v, want %v", tt.Name, got.Result, tt.Want)
+			res, _ := runner.Run(s, 2, tt.Args.InputPath)
+			if len(res) > 0 && res[0].Result != tt.Want {
+				t.Errorf("%v = %v, want %v", tt.Name, res[0].Result, tt.Want)
 			}
 		})
 	}

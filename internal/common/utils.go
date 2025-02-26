@@ -16,3 +16,20 @@ func SplitLines(input string) []string {
 	}
 	return result
 }
+
+type StringArray struct {
+	arr []string
+}
+
+func (s *StringArray) Set(input string) error {
+	s.arr = strings.Split(input, ",")
+	return nil
+}
+
+func (s *StringArray) String() string {
+	return strings.Join(s.arr, ",")
+}
+
+func (s *StringArray) GetValue() []string {
+	return s.arr
+}

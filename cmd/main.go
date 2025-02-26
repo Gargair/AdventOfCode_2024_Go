@@ -6,21 +6,30 @@ import (
 	"os"
 	"path/filepath"
 	"strconv"
+	"text/tabwriter"
 
+	"AdventOfCode/internal/common"
 	"AdventOfCode/internal/runner"
 	"AdventOfCode/internal/solutions"
 	"AdventOfCode/internal/solutions/day01"
 	"AdventOfCode/internal/solutions/day02"
+
+	"golang.org/x/text/cases"
+	"golang.org/x/text/language"
 )
 
 func main() {
 	// Parse command-line arguments
-	problemPtr := flag.String("problem", "", "Problem to solve (format: day01, day02, etc.)")
+	problemInput := common.StringArray{}
+	flag.Var(&problemInput, "problem", "Problem to solve (format: day01, day02, etc.)")
 	partPtr := flag.String("part", "", "Part to solve (1 or 2)")
 	inputFolderPtr := flag.String("inputs", "inputs", "Folder containing input files")
 	flag.Parse()
+	problems := problemInput.GetValue()
+	caser := cases.Title(language.English)
+	writer := tabwriter.NewWriter(os.Stdout, 1, 4, 4, ' ', 0)
 
-	if *problemPtr == "" {
+	if len(problems) == 0 {
 		fmt.Println("Please specify a problem using -problem flag")
 		os.Exit(1)
 	}
@@ -42,21 +51,25 @@ func main() {
 		os.Exit(1)
 	}
 
-	// Construct input file path
-	inputFile := filepath.Join(*inputFolderPtr, fmt.Sprintf("%s.txt", *problemPtr))
+	for _, problem := range problems {
+		// Construct input file path
+		inputFile := filepath.Join(*inputFolderPtr, fmt.Sprintf("%s.txt", problem))
 
-	// Get the appropriate solution
-	solution := getSolution(*problemPtr)
-	if solution == nil {
-		fmt.Printf("Unknown problem: %s\n", *problemPtr)
-		os.Exit(1)
-	}
+		// Get the appropriate solution
+		solution := getSolution(problem)
+		if solution == nil {
+			fmt.Printf("Unknown problem: %s\n", problem)
+			os.Exit(1)
+		}
 
-	// Run the solution
-	results := runner.Run(solution, part, inputFile)
+		// Run the solution
+		results, total_elapsed := runner.Run(solution, part, inputFile)
 
-	for _, result := range results {
-		fmt.Printf("Name: %s\tResult: %s\tExecution time: %s\n", result.Name, result.Result, result.Elapsed)
+		for _, result := range results {
+			fmt.Fprintf(writer, "Problem: %s\t%s\tResult: %s\tExecution time: %s\n", caser.String(problem), result.Name, result.Result, result.Elapsed)
+		}
+		writer.Flush()
+		fmt.Printf("Total elapsed: %s\n", total_elapsed)
 	}
 }
 
