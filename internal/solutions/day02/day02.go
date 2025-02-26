@@ -87,14 +87,8 @@ func IsValidReportPart2(report []int) bool {
 	if IsValidReportPart1(report) {
 		return true
 	}
-	results := make(chan bool, len(report))
 	for index := range report {
-		go func() {
-			results <- IsValidReportPart1(slices.Delete(slices.Clone(report), index, index+1))
-		}()
-	}
-	for range report {
-		if <-results {
+		if IsValidReportPart1(slices.Delete(slices.Clone(report), index, index+1)) {
 			return true
 		}
 	}
