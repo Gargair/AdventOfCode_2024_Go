@@ -1,12 +1,13 @@
 package day01
 
 import (
-	"AdventOfCode/internal/common"
-	"AdventOfCode/internal/intmath"
 	"fmt"
 	"slices"
 	"strconv"
 	"strings"
+
+	"github.com/Gargair/AdventOfCode_2024_Go/internal/common"
+	"github.com/Gargair/AdventOfCode_2024_Go/internal/intmath"
 )
 
 type Day01_Solution struct{}

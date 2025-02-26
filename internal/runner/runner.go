@@ -5,7 +5,7 @@ import (
 	"os"
 	"time"
 
-	"AdventOfCode/internal/solutions"
+	"github.com/Gargair/AdventOfCode_2024_Go/internal/solutions"
 )
 
 // Run executes a solution with the given parameters

@@ -1,4 +1,4 @@
-module AdventOfCode
+module github.com/Gargair/AdventOfCode_2024_Go
 
 go 1.23.4
 

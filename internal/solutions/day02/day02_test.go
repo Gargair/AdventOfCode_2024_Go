@@ -1,9 +1,10 @@
 package day02
 
 import (
-	"AdventOfCode/internal/helper"
-	"AdventOfCode/internal/runner"
 	"testing"
+
+	"github.com/Gargair/AdventOfCode_2024_Go/internal/helper"
+	"github.com/Gargair/AdventOfCode_2024_Go/internal/runner"
 )
 
 func TestDay02_Part1(t *testing.T) {

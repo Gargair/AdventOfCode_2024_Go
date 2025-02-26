@@ -155,10 +155,10 @@ func updateMainFile(day string, structName string) error {
 	contentStr := string(content)
 
 	// Check if the day is already imported
-	importLine := fmt.Sprintf(`"AdventOfCode/internal/solutions/%s"`, day)
+	importLine := fmt.Sprintf(`"github.com/Gargair/AdventOfCode_2024_Go/internal/solutions/%s"`, day)
 	if !strings.Contains(contentStr, importLine) {
 		// Find the last import
-		lastImportIndex := strings.LastIndex(contentStr, `"AdventOfCode/internal/solutions/`)
+		lastImportIndex := strings.LastIndex(contentStr, `"github.com/Gargair/AdventOfCode_2024_Go/internal/solutions/`)
 		if lastImportIndex == -1 {
 			return fmt.Errorf("could not find import section in main.go")
 		}
@@ -202,9 +202,10 @@ func updateMainFile(day string, structName string) error {
 const solutionTemplate = `package {{.PackageName}}
 
 import (
-	"AdventOfCode/internal/common"
 	"fmt"
 	"strconv"
+
+	"github.com/Gargair/AdventOfCode_2024_Go/internal/common"
 )
 
 type {{.StructName}} struct{}
@@ -246,9 +247,10 @@ func (s {{.StructName}}) ParseInput(input string) (interface{}, error) {
 const testTemplate = `package {{.PackageName}}
 
 import (
-	"AdventOfCode/internal/helper"
-	"AdventOfCode/internal/runner"
 	"testing"
+	
+	"github.com/Gargair/AdventOfCode_2024_Go/internal/helper"
+	"github.com/Gargair/AdventOfCode_2024_Go/internal/runner"
 )
 
 func Test{{.StructName}}_Part1(t *testing.T) {

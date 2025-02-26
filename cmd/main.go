@@ -8,11 +8,11 @@ import (
 	"strconv"
 	"text/tabwriter"
 
-	"AdventOfCode/internal/common"
-	"AdventOfCode/internal/runner"
-	"AdventOfCode/internal/solutions"
-	"AdventOfCode/internal/solutions/day01"
-	"AdventOfCode/internal/solutions/day02"
+	"github.com/Gargair/AdventOfCode_2024_Go/internal/common"
+	"github.com/Gargair/AdventOfCode_2024_Go/internal/runner"
+	"github.com/Gargair/AdventOfCode_2024_Go/internal/solutions"
+	"github.com/Gargair/AdventOfCode_2024_Go/internal/solutions/day01"
+	"github.com/Gargair/AdventOfCode_2024_Go/internal/solutions/day02"
 
 	"golang.org/x/text/cases"
 	"golang.org/x/text/language"
