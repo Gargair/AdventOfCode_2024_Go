@@ -2,7 +2,6 @@ package day03
 
 import (
 	"fmt"
-	"log"
 	"regexp"
 	"strconv"
 )
@@ -24,11 +23,8 @@ func (s Day03_Solution) SolvePart1(input interface{}) (string, error) {
 		return "", fmt.Errorf("expected string, got %T", input)
 	}
 
-	log.Println(regexpPart1)
-
 	sum := 0
 	for _, match := range regexpPart1.FindAllStringSubmatch(data, -1) {
-		log.Println(match)
 		// 0 Index full match, 1 CaptureGroup 1, 2 CaptureGroup 2
 		left, _ := strconv.Atoi(match[1])
 		right, _ := strconv.Atoi(match[2])
