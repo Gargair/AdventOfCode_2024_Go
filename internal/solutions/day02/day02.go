@@ -4,6 +4,7 @@ import (
 	"AdventOfCode/internal/common"
 	"AdventOfCode/internal/intmath"
 	"fmt"
+	"runtime"
 	"slices"
 	"strconv"
 	"strings"
@@ -33,9 +34,26 @@ func (s Day02_Solution) SolvePart2(input interface{}) (string, error) {
 		return "", fmt.Errorf("expected [][]int, got %T", input)
 	}
 
-	count := 0
+	reporter := make(chan bool, len(reports))
+	numWorkers := runtime.NumCPU()
+	jobs := make(chan []int, len(reports))
+
+	for w := 0; w < numWorkers; w++ {
+		go func() {
+			for job := range jobs {
+				reporter <- IsValidReportPart2(job)
+			}
+		}()
+	}
+
 	for _, report := range reports {
-		if IsValidReportPart2(report) {
+		jobs <- report
+	}
+	close(jobs)
+
+	count := 0
+	for range reports {
+		if <-reporter {
 			count++
 		}
 	}
@@ -69,24 +87,18 @@ func IsValidReportPart2(report []int) bool {
 	if IsValidReportPart1(report) {
 		return true
 	}
-	mu := make(chan bool, len(report))
+	results := make(chan bool, len(report))
 	for index := range report {
 		go func() {
-			if IsValidReportPart1(slices.Delete(slices.Clone(report), index, index+1)) {
-				mu <- true
-			} else {
-				mu <- false
-			}
+			results <- IsValidReportPart1(slices.Delete(slices.Clone(report), index, index+1))
 		}()
 	}
-	isValid := false
 	for range report {
-		result := <-mu
-		if result {
-			isValid = true
+		if <-results {
+			return true
 		}
 	}
-	return isValid
+	return false
 }
 
 func (s Day02_Solution) ParseInput(input string) (ret interface{}, err error) {
