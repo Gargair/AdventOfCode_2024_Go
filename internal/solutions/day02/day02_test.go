@@ -3,12 +3,12 @@ package day02
 import (
 	"testing"
 
-	"github.com/Gargair/AdventOfCode_2024_Go/internal/helper"
+	"github.com/Gargair/AdventOfCode_2024_Go/internal/common"
 	"github.com/Gargair/AdventOfCode_2024_Go/internal/runner"
 )
 
 func TestDay02_Solution_Part1(t *testing.T) {
-	tests, err := helper.ReadTestData("day02", 1)
+	tests, err := common.ReadTestData("day02", 1)
 
 	if err != nil {
 		t.Errorf("Day02: %v", err)
@@ -26,7 +26,7 @@ func TestDay02_Solution_Part1(t *testing.T) {
 }
 
 func TestDay02_Solution_Part2(t *testing.T) {
-	tests, err := helper.ReadTestData("day02", 2)
+	tests, err := common.ReadTestData("day02", 2)
 
 	if err != nil {
 		t.Errorf("Day02: %v", err)
@@ -46,7 +46,7 @@ func TestDay02_Solution_Part2(t *testing.T) {
 }
 
 func BenchmarkDay02_Solution_Part1(b *testing.B) {
-	tests, err := helper.ReadTestData("day02", 1)
+	tests, err := common.ReadTestData("day02", 1)
 
 	if err != nil {
 		b.Errorf("Day02: %v", err)
@@ -63,7 +63,7 @@ func BenchmarkDay02_Solution_Part1(b *testing.B) {
 }
 
 func BenchmarkDay02_Solution_Part2(b *testing.B) {
-	tests, err := helper.ReadTestData("day02", 2)
+	tests, err := common.ReadTestData("day02", 2)
 
 	if err != nil {
 		b.Errorf("Day02: %v", err)

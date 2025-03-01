@@ -255,12 +255,12 @@ const testTemplate = `package {{.PackageName}}
 import (
 	"testing"
 	
-	"github.com/Gargair/AdventOfCode_2024_Go/internal/helper"
+	"github.com/Gargair/AdventOfCode_2024_Go/internal/common"
 	"github.com/Gargair/AdventOfCode_2024_Go/internal/runner"
 )
 
 func Test{{.StructName}}_Part1(t *testing.T) {
-	tests, err := helper.ReadTestData("{{.Day}}", 1)
+	tests, err := common.ReadTestData("{{.Day}}", 1)
 
 	if err != nil {
 		t.Errorf("{{.Day}}: %v", err)
@@ -278,7 +278,7 @@ func Test{{.StructName}}_Part1(t *testing.T) {
 }
 
 func Test{{.StructName}}_Part2(t *testing.T) {
-	tests, err := helper.ReadTestData("{{.Day}}", 2)
+	tests, err := common.ReadTestData("{{.Day}}", 2)
 
 	if err != nil {
 		t.Errorf("{{.Day}}: %v", err)
@@ -296,7 +296,7 @@ func Test{{.StructName}}_Part2(t *testing.T) {
 }
 
 func Benchmark{{.StructName}}_Part1(b *testing.B) {
-	tests, err := helper.ReadTestData("{{.Day}}", 1)
+	tests, err := common.ReadTestData("{{.Day}}", 1)
 
 	if err != nil {
 		b.Errorf("{{.Day}}: %v", err)
@@ -313,7 +313,7 @@ func Benchmark{{.StructName}}_Part1(b *testing.B) {
 }
 
 func Benchmark{{.StructName}}_Part2(b *testing.B) {
-	tests, err := helper.ReadTestData("{{.Day}}", 2)
+	tests, err := common.ReadTestData("{{.Day}}", 2)
 
 	if err != nil {
 		b.Errorf("{{.Day}}: %v", err)
