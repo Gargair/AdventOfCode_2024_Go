@@ -225,7 +225,7 @@ func (s {{.StructName}}) SolvePart1(input interface{}) (string, error) {
 	// TODO: Implement solution for Part 1
 	_ = data // Remove this line once you use the data
 
-	return "0", nil // Replace with actual result
+	return strconv.Itoa(0), nil // Replace with actual result
 }
 
 func (s {{.StructName}}) SolvePart2(input interface{}) (string, error) {
@@ -237,7 +237,7 @@ func (s {{.StructName}}) SolvePart2(input interface{}) (string, error) {
 	// TODO: Implement solution for Part 2
 	_ = data // Remove this line once you use the data
 
-	return "0", nil // Replace with actual result
+	return strconv.Itoa(0), nil // Replace with actual result
 }
 
 func (s {{.StructName}}) ParseInput(input string) (interface{}, error) {
