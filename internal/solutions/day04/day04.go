@@ -53,9 +53,15 @@ func (s Day04_Solution) SolvePart2(input interface{}) (string, error) {
 	for startX, line := range data {
 		for startY, rune := range line {
 			if rune == match[1] {
-				if hasMatchingStringInDirection(data, match, startX-1, startY-1, 1, 1) && (hasMatchingStringInDirection(data, match, startX+1, startY-1, -1, 1) || hasMatchingStringInDirection(data, match, startX-1, startY+1, 1, -1)) {
+				TLBR := hasMatchingStringInDirection(data, match, startX-1, startY-1, 1, 1)
+				BLTR := hasMatchingStringInDirection(data, match, startX+1, startY-1, -1, 1)
+				TRBL := hasMatchingStringInDirection(data, match, startX-1, startY+1, 1, -1)
+				if TLBR && (BLTR || TRBL) {
 					count++
-				} else if (hasMatchingStringInDirection(data, match, startX+1, startY-1, -1, 1) || hasMatchingStringInDirection(data, match, startX-1, startY+1, 1, -1)) && hasMatchingStringInDirection(data, match, startX+1, startY+1, -1, -1) {
+					continue
+				}
+				BRTL := hasMatchingStringInDirection(data, match, startX+1, startY+1, -1, -1)
+				if (BLTR || TRBL) && BRTL {
 					count++
 				}
 			}
