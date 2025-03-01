@@ -8,15 +8,16 @@ import (
 	"strconv"
 	"text/tabwriter"
 
+	"golang.org/x/text/cases"
+	"golang.org/x/text/language"
+
 	"github.com/Gargair/AdventOfCode_2024_Go/internal/common"
 	"github.com/Gargair/AdventOfCode_2024_Go/internal/runner"
 	"github.com/Gargair/AdventOfCode_2024_Go/internal/solutions"
 	"github.com/Gargair/AdventOfCode_2024_Go/internal/solutions/day01"
 	"github.com/Gargair/AdventOfCode_2024_Go/internal/solutions/day02"
 	"github.com/Gargair/AdventOfCode_2024_Go/internal/solutions/day03"
-
-	"golang.org/x/text/cases"
-	"golang.org/x/text/language"
+	"github.com/Gargair/AdventOfCode_2024_Go/internal/solutions/day04"
 )
 
 func main() {
@@ -82,6 +83,8 @@ func getSolution(problem string) solutions.Solution {
 		return &day02.Day02_Solution{}
 	case "day03":
 		return &day03.Day03_Solution{}
+	case "day04":
+		return &day04.Day04_Solution{}
 	default:
 		return nil
 	}
