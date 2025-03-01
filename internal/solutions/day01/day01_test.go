@@ -7,7 +7,7 @@ import (
 	"github.com/Gargair/AdventOfCode_2024_Go/internal/runner"
 )
 
-func TestDay01_Part1(t *testing.T) {
+func TestDay01_Solution_Part1(t *testing.T) {
 	tests, err := helper.ReadTestData("day01", 1)
 
 	if err != nil {
@@ -25,7 +25,7 @@ func TestDay01_Part1(t *testing.T) {
 	}
 }
 
-func TestDay01_Part2(t *testing.T) {
+func TestDay01_Solution_Part2(t *testing.T) {
 	tests, err := helper.ReadTestData("day01", 2)
 
 	if err != nil {
@@ -43,7 +43,7 @@ func TestDay01_Part2(t *testing.T) {
 	}
 }
 
-func BenchmarkDay01_Part1(b *testing.B) {
+func BenchmarkDay01_Solution_Part1(b *testing.B) {
 	tests, err := helper.ReadTestData("day01", 1)
 
 	if err != nil {
@@ -60,7 +60,7 @@ func BenchmarkDay01_Part1(b *testing.B) {
 	}
 }
 
-func BenchmarkDay01_Part2(b *testing.B) {
+func BenchmarkDay01_Solution_Part2(b *testing.B) {
 	tests, err := helper.ReadTestData("day01", 2)
 
 	if err != nil {
