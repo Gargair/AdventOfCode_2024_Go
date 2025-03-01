@@ -7,6 +7,9 @@ import (
 	"path/filepath"
 	"strings"
 	"text/template"
+
+	"golang.org/x/text/cases"
+	"golang.org/x/text/language"
 )
 
 type DayData struct {
@@ -21,6 +24,7 @@ func main() {
 	dayPtr := flag.Int("day", 0, "Day number to generate (1-25)")
 	overwritePtr := flag.Bool("force", false, "Force overwrite if files already exist")
 	flag.Parse()
+	caser := cases.Title(language.English)
 
 	if *dayPtr < 1 || *dayPtr > 25 {
 		fmt.Println("Please provide a valid day number between 1 and 25")
@@ -35,11 +39,12 @@ func main() {
 	internalDir := "internal"
 	solutionsDir := filepath.Join(internalDir, "solutions")
 	dayDir := filepath.Join(solutionsDir, day)
-	inputsDir := "inputs"
+	inputsDir := "Input"
+	testInputsDir := "Input_Test"
 	testdataDir := "testdata"
 
 	// Ensure directories exist
-	dirs := []string{solutionsDir, dayDir, inputsDir, testdataDir}
+	dirs := []string{solutionsDir, dayDir, inputsDir, testInputsDir, testdataDir}
 	for _, dir := range dirs {
 		if err := os.MkdirAll(dir, os.ModePerm); err != nil {
 			fmt.Printf("Error creating directory %s: %v\n", dir, err)
@@ -52,7 +57,7 @@ func main() {
 		Day:         day,
 		DayNumber:   dayNumber,
 		PackageName: day,
-		StructName:  fmt.Sprintf("%s_Solution", strings.Title(day)),
+		StructName:  fmt.Sprintf("%s_Solution", caser.String(day)),
 	}
 
 	// Template files to generate
@@ -63,7 +68,8 @@ func main() {
 
 	// Input files to create if they don't exist
 	inputFiles := []string{
-		filepath.Join(inputsDir, fmt.Sprintf("%s.txt", day)),
+		filepath.Join(inputsDir, fmt.Sprintf("%s.txt", caser.String(day))),
+		filepath.Join(testInputsDir, fmt.Sprintf("%s.txt", caser.String(day))),
 		filepath.Join(testdataDir, fmt.Sprintf("%s.txt", day)),
 	}
 
